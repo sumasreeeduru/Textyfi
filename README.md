@@ -1,4 +1,4 @@
-# how to add files into a new empty repository
+# How to add files into a new empty repository
   ##### 1. go to the folder where local files are present which you want to add
   ##### 2.`git init`
   ##### 3.`git add .`
