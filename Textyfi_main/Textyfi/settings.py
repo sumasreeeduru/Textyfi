@@ -72,11 +72,16 @@ WSGI_APPLICATION = 'Textyfi.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'djongo',
+        "CLIENT": {
+           "name": 'TextYfiDB',
+           "host": 'mongodb+srv://thanuja_20:<yMHnCcfNdzJECyHH>@cluster0.qm1ic.mongodb.net/<TextYfiDB>?retryWrites=true&w=majority',
+           "username": 'thanuja_20',
+           "password": 'yMHnCcfNdzJECyHH',
+           "authMechanism": "SCRAM-SHA-1",
+        },
     }
 }
 
