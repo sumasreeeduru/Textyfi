@@ -1,0 +1,7 @@
+{{ form.errors }}
+<form action="{% url 'register_view' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="submit">
+</form>
+existing user click <a href="{% url 'login_view' %}">here</a>

@@ -1,0 +1,9 @@
+{{ form.errors }}
+    <div class="container">
+        <form action="{% url 'login_view' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+            <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Login</button>
+        </form>
+        Don't have an account? <a href="{% url 'register_view' %}" target="_blank"><strong>register here</strong></a>!
+    </div>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <meta charset="UTF-8">
+    <title> TextYfi </title>
+    <link rel="stylesheet">
+</head>
+<body>
+
+{% if request.user.is_authenticated %}
+	<h1>Welcome {{request.user.username}} to my SOAD Assignment1 | <a href="{% url 'logout_view' %}">Logout</a></h1>
+
+    <h2> Below are details of the events conducted for Abhisarga </h2>
+
+{% else %}
+    <p><a href="{% url 'register_view' %}">Sign Up</a></p>
+
+{% endif %}
+
+</body>
+</html>
