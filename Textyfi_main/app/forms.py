@@ -12,7 +12,6 @@ class user_model_Form(UserCreationForm):
         fields = ['email', 'username', 'firstname', 'lastname', 'dob', 'password1', 'password2']
 
 
-
 class AccountAuthenticationForm(forms.ModelForm):
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
@@ -26,3 +25,8 @@ class AccountAuthenticationForm(forms.ModelForm):
             password = self.cleaned_data['password']
             if not authenticate(email=email, password=password):
                 raise forms.ValidationError("Invalid login")
+
+class ReviewForm(forms.ModelForm):
+    review= forms.CharField(label='Review')
+    class Meta:
+        fields=('review',)
