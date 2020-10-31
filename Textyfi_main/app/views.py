@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import user_model_Form, AccountAuthenticationForm
+from .forms import *
+import requests
+import json
 
-# Create your views here.
 def index_view(request):
     return render(request, 'app/index.html')
 
@@ -37,4 +38,15 @@ def logout_view(request):
     logout(request)
     return redirect('/')
 
+def ratereview(request):
+    rating  = None
+    if request.method == 'POST':
+        res = request.POST
+        review = res['review']
+        res = requests.get('http://localhost:8000/api/ratereview/' + review)
+        rating = res.text
+
+    context = {'rating':rating}
+
+    return render(request, 'app/ratereview.html', context)    
 
