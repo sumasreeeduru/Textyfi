@@ -6,3 +6,9 @@
   ##### 5.`git remote add origin "your url from the respository"`
   ##### 6.`git push origin master`
   
+# how to push after some changes
+##### 1. go inside Textyfi folder
+##### 2. git status
+##### 3. git add .
+##### 4. git commit -m "You changes"
+##### 5. git push 
