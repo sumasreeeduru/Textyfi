@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordCounter</title>
+</head>
+<body>
+    <form action="{% url 'wordcounter' %}" method="POST" enctype='application/json'>
+        {% csrf_token %}
+        <input type="text" name="sentence" placeholder="input">
+        <button type="submit">Get WordCount</button>
+    </form>
+
+    {% if count %}
+        Sentence={{ sentence }}
+        Count = {{ count }}
+    {% endif %}
+</body>
+</html>

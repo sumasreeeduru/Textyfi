@@ -4,6 +4,13 @@ from django.shortcuts import render, redirect
 from .forms import *
 import requests
 import json
+from rest_framework_simplejwt.tokens import RefreshToken
+from .models import user_model
+from .utils import Util
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
+from api.models import wordcounterModel
+from api.views import wordcounterView
 
 def index_view(request):
     return render(request, 'app/index.html')
@@ -49,4 +56,25 @@ def ratereview(request):
     context = {'rating':rating}
 
     return render(request, 'app/ratereview.html', context)    
+# temp={}
+def wordcounter(request):
+    count=None
+    sentence=wordcounterModel.objects.all()
+    if request.method == 'POST':
+        
+        res=request.POST
+        sentence=res['sentence']
+        res=requests.get('http://localhost:8000/api/wordcounter/'+ sentence)
+        count=res.text
+    temp={'sentence':sentence,'count':count}
+    return render(request,'app/wordcounter.html',temp)
 
+# def temp_view(request):
+#     return temp
+# def wordcounterget(request):
+#     try:
+#         data=wordcounterModel.objects.all()
+#         serializer= wordcounteSerializer(data,many=True)
+#         return Response(data=serializer.data)
+#     except ObjectDoesNotExist :
+#         return Response(status=status.HTTP_404_NOT_FOUND)

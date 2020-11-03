@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import user_model
 from django.contrib.auth import authenticate
+from api.models import wordcounterModel
 
 class user_model_Form(UserCreationForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -30,3 +31,5 @@ class ReviewForm(forms.ModelForm):
     review= forms.CharField(label='Review')
     class Meta:
         fields=('review',)
+
+
