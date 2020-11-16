@@ -1,9 +1,36 @@
-{{ form.errors }}
-    <div class="container">
-        <form action="{% url 'login_view' %}" method="POST" name="form">
-        {% csrf_token %}
-        {{ form.as_p }}
-            <button style="background-color:#F4EB16; color:blue" class="btn btn-outline-info" type="submit">Login</button>
-        </form>
-        Don't have an account? <a href="{% url 'register_view' %}" target="_blank"><strong>register here</strong></a>!
-    </div>
+{% load static %}
+<!DOCTYPE html>
+<!--www.codingflicks.com--> 
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> Login Form</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'app/login.css' %}">
+
+</head>
+<body>
+	{% if form.errors %}
+		<div class="alert alert-danger" style="margin-top: 155px;">{{form.errors}}</div>
+	{% endif %}
+	<div class="form-box">
+		
+		<div class="header-text">
+			Login Form
+		</div>
+		
+		<form method="POST"  action="{% url 'login_view' %}"> 
+			{% csrf_token %} 
+			
+			<input placeholder="Your Email Address" type="text" name="email"> 
+			<input placeholder="Your Password" type="password" name="password">
+			<!-- <input id="terms" type="checkbox">  -->
+			<!-- <label for="terms"></label><span>Agree with <a href="#">Terms & Conditions</a></span>  -->
+			<button type="submit" >login</button>
+		 </form>
+		 <a href="{% url 'register_view' %}">Go to Signup</a>
+	</div>
+</body>
+</html>
+
+
+
