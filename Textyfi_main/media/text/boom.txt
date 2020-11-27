@@ -1,0 +1,7 @@
+pip install djongo
+pip install dnspython
+pip install -U textblob
+python -m textblob.download_corpora
+pip install vaderSentiment
+pip install djangorestframework
+pip install djangorestframework-simplejwt

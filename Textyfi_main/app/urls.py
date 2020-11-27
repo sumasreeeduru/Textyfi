@@ -9,4 +9,5 @@ urlpatterns = [
     path('ratereview/', ratereview, name="ratereview"),
     path('wordcounter/',wordcounter,name='wordcounter'),
     path('wordcounterapi/',wordcounterView,name='wordcounterapi'),
+    path('wordcounterimg/',wordcounterimg,name='wordcounterimg'),
     ]

@@ -1,10 +1,6 @@
 from rest_framework import serializers
 from .models import wordcounterModel
-# class reviewratingSerializer(serializers.Serializers):
-#     review=serializers.CharField()
-#     rating=serializers.IntegerField()
-#     def create(self,validated_data):
-#         return reviewratingModel(**validated_data)
+
 class wordcounteSerializer(serializers.Serializer):
     sentence=serializers.CharField()
     count = serializers.IntegerField()

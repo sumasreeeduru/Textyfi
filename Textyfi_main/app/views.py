@@ -5,12 +5,24 @@ from .forms import *
 import requests
 import json
 from rest_framework_simplejwt.tokens import RefreshToken
-from .models import user_model
+from .models import user_model,inpimg
 from .utils import Util
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
 from api.models import wordcounterModel,ratereviewModel
 from api.views import wordcounterView
+
+import re
+import os,io
+import pandas as pd
+from google.cloud import vision as v
+from google.cloud.vision_v1 import types
+os.environ['GOOGLE_APPLICATION_CREDENTIALS']=r'app/ServiceAccount.json'
+FILE_NAME = 'media/images/2.jpg'
+# FOLDER_PATH = r'C:/Users/tanya/Desktop/Textyfi-Copy-Copy/Textyfi_main/app'
+
+
+
 
 def index_view(request):
 
@@ -71,6 +83,7 @@ def ratereview(request):
 
     return render(request, 'app/ratereview.html', context)    
 # temp={}
+
 def wordcounter(request):
     count=None
     sentence=wordcounterModel.objects.all()
@@ -85,15 +98,41 @@ def wordcounter(request):
     else:
         temp={'sentence':"Enter text", 'count':0}
     return render(request,'app/wordcounter.html',temp)
+
+
+
+def wordcounterimg(request):
+    if request.method=='POST':
+        name1=inpimg(inp_img=request.POST)
+        form=imgForm(request.POST,request.FILES)
+        if form.is_valid():
+            document=form.save(commit=False)
+            document.name='2.jpg'
+            document.save()
+           
+            client=v.ImageAnnotatorClient()
+            with io.open(FILE_NAME,'rb') as image_file:
+                content=image_file.read()
+            image=v.Image(content=content)
+            response=client.text_detection(image=image)
+            texts=response.text_annotations
+            # df=pd.DataFrame(columns=['description'])
+            df=[]
+            for text in texts:
+                df.append(text.description
+                )
+            # df[1:] = [''.join(df[1 : ])] 
+            sentence=df[0]
+            sentence=sentence.replace('#','')  
+            sentence = re.sub(r'[^a-zA-Z0-9\s]', '', sentence)
+            wordlist=sentence.split()
+            for word in wordlist:
+                if chr(35) in word:
+                    continue
+            cnt=len(wordlist)
+            temp={'sentence':sentence,'count':cnt}
+            return render(request,'app/wordcounter.html',temp)
+    else:
+        form=imgForm()
+    return render(request,'app/wordcounter.html',{'form':form})
         
-
-
-# def temp_view(request):
-#     return temp
-# def wordcounterget(request):
-#     try:
-#         data=wordcounterModel.objects.all()
-#         serializer= wordcounteSerializer(data,many=True)
-#         return Response(data=serializer.data)
-#     except ObjectDoesNotExist :
-#         return Response(status=status.HTTP_404_NOT_FOUND)

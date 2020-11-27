@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
+from texthandwritten.views import texthandwritten,texthandview,download,textsen
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('app.urls')),
     path('api/',include('api.urls')),
+    path('textsen/<str:sentence>',textsen,name="textsen"),
+    path('texthandview/',texthandview,name="texthandview"),
+    path('texthandwritten/',texthandwritten,name="texthandwritten"),
+    path('outputs/output.pdf', download,name="download"),
 ]

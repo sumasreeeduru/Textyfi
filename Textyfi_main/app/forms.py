@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-from .models import user_model
+from .models import user_model,inpimg
 from django.contrib.auth import authenticate
 from api.models import wordcounterModel
 
@@ -31,5 +31,12 @@ class ReviewForm(forms.ModelForm):
     review= forms.CharField(label='Review')
     class Meta:
         fields=('review',)
+
+class imgForm(forms.ModelForm):
+    class Meta:
+        model=inpimg
+        fields=['inp_img']
+        labels={'inp_img':("Image"),}
+        
 
 

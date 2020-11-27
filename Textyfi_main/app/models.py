@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from datetime import datetime
-
-
+import os
+from django.core.files.storage import FileSystemStorage
+from django.urls import path
 # Create your models here.
 
 class MyAccountManager(BaseUserManager):
@@ -58,3 +59,24 @@ class user_model(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+
+
+
+
+class inpimg(models.Model):
+    def update(instance,filename):
+        PATH = 'media/images/2.jpg'
+        # instance.inp_img.delete_all_created_images()
+        os.remove(PATH)
+        
+        
+        filename='{}.{}'.format(2,'jpg')
+        upload_to='images'
+        
+        # obj=OverwriteStorage;
+        # obj.get_available_name(os.path.join(upload_to,filename))
+        
+        return os.path.join(upload_to,filename)
+    inp_img=models.FileField(upload_to=update)
+    
+    

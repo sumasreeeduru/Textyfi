@@ -65,13 +65,13 @@
         {% csrf_token %}
         
         <textarea class="form-control" rows="10" id="comment" name="review">{{ review }}</textarea>
-        <button type="submit"  >Get review</button>
+        <button type="submit" class="btn btn-info" >Get review</button>
     </div>
  
     <br> 
     <div class="input-group mb-3" style="padding-left: 50px;">
       <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon1">Rating for the review</span>
+        <span class="input-group-text" id="basic-addon1" >Rating for the review</span>
       </div>
       {% if rating %}
       <textarea>{{ rating }}</textarea>
@@ -87,7 +87,7 @@
         <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
       </div>
       <div class="input-group-append">
-        <span class="input-group-text" id="">Upload</span>
+        <button type="submit" class="btn btn-info">Upload</button> 
       </div>
     </div>
        
@@ -99,7 +99,7 @@
    
       <li><a href='#tabs-2' style="background-color: rgb(161, 161, 161);">Word Retrieval</a></a></li>
       <li><a href="{% url 'ratereview' %}" >Review rating</a></a></li>
-      <li><a href='#tabs-4'style="background-color: rgb(161, 161, 161);">Text to Handwritten</a></a></li>
+      <li><a href="{% url 'texthandwritten' %}" style="background-color: rgb(161, 161, 161);">Text to Handwritten</a></a></li>
     </ul>
   </div>
   </div>

@@ -74,7 +74,7 @@
         {% else %}
         <textarea name="sentence" class="form-control" rows="10" id="txtName" type="submit"></textarea>
         {% endif %}
-        <button type="submit"  >Get count</button>
+        <button type="submit" class="btn btn-info" >Get count</button>
       </form>
      
     
@@ -96,13 +96,11 @@
   </div>
   
   <div class="input-group mb-3" style="padding-left: 50px;">
-    <div class="custom-file">
-      <input type="file" class="custom-file-input" id="inputGroupFile02">
-      <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
-    </div>
-    <div class="input-group-append">
-      <span class="input-group-text" id="">Upload</span>
-    </div>
+    <form action="{% url 'wordcounterimg' %}" method="POST"  enctype="multipart/form-data"> 
+      {% csrf_token %} 
+      {{ form.as_p }} 
+      <button type="submit" class="btn btn-info">Upload</button> 
+  </form> 
   </div>
      
     
@@ -117,7 +115,7 @@
    
       <li><a href='#tabs-2' style="background-color: rgb(161, 161, 161);">Word Retrieval</a></a></li>
       <li><a href="{% url 'ratereview' %}" style="background-color: rgb(161, 161, 161);">Review rating</a></a></li>
-      <li><a href='#tabs-4'style="background-color: rgb(161, 161, 161);">Text to Handwritten</a></a></li>
+      <li><a href="{% url 'texthandwritten' %}" style="background-color: rgb(161, 161, 161);">Text to Handwritten</a></a></li>
       <!-- <div class="main-rounded-button"><a href="#">View All Schedules</a></div> -->
     </ul>
   </div>
