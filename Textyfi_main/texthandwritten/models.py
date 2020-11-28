@@ -17,4 +17,16 @@ class handwritten(models.Model):
         return os.path.join(upload_to,filename)
     textfile=models.FileField(upload_to=update)
 class texthand(models.Model):
+    def update(instance,filename):
+        PATH = 'media/outputs/output.pdf'
+        # instance.inp_img.delete_all_created_images()
+        os.remove(PATH)
+        filename='{}.{}'.format('output','pdf')
+        upload_to='outputs'
+        
+        # obj=OverwriteStorage;
+        # obj.get_available_name(os.path.join(upload_to,filename))
+        
+        return os.path.join(upload_to,filename)
     sentence=models.CharField(max_length=10000)
+    pdffile=models.FileField(default="outputs/output.pdf")

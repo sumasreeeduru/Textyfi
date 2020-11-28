@@ -25,4 +25,5 @@ urlpatterns = [
     path('texthandview/',texthandview,name="texthandview"),
     path('texthandwritten/',texthandwritten,name="texthandwritten"),
     path('outputs/output.pdf', download,name="download"),
+    path('media/outputs/output.pdf', download,name="download"),
 ]

@@ -11,7 +11,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.response import Response
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import IsAuthenticated
-from .serializers import wordcounteSerializer
+from .serializers import wordcounteSerializer,texthandSerializer
 from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticated
 from .models import wordcounterModel
@@ -36,6 +36,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.svm import LinearSVC
 from sklearn.metrics import classification_report
+from texthandwritten.models import texthand
 # from scipy.sparse.linalg import lsqr as sparse_lsqr
 nlp = en_core_web_sm.load()
 
@@ -434,3 +435,46 @@ def wordcounterpost(request):
         return Response(serializer.data)
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(http_method_names=['GET','POST'])        
+def texthandview(request):
+        if request.method=='GET':
+                # fetch_report()
+                return texthandget(request)
+        elif request.method=='POST':
+                return texthandpost(request)
+# @api_view(http_method_names=['get'])
+# def fetch_report():
+#         short_report = open("media/outputs/output.pdf", 'rb')
+#         response = HttpResponse(FileWrapper(short_report), content_type='application/pdf')
+#         return response
+def texthandget(request):
+        try:
+                data= texthand.objects.all()
+                # pdffile=fetch_report()
+                # serializer= texthandSerializer(pdffile=pdffile,many=True)
+                serializer= texthandSerializer(data,context={'request':request},many=True)
+                return Response(data=serializer.data)
+        except ObjectDoesNotExist :
+                return Response(status=status.HTTP_404_NOT_FOUND) 
+def texthandpost(request):
+        # hdata = texthand()
+        hdata= texthand.objects.all()
+        serializer=texthandSerializer(hdata,data=request.data)
+        if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data)
+        else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+
+FILE_PATH = "media/outputs/output.pdf"
+# @api_view(http_method_names=['GET',])        
+# def getFile():
+#     path = expanduser('~/outputs/')
+#     wrapper = FileWrapper(open("media/outputs/output.pdf",'rb'))
+#     response = HttpResponse(wrapper, content_type=mimetypes.guess_type('output.pdf')[0])
+#     response['Content-Length'] = os.path.getsize("media/outputs/output.pdf")
+#     response['Content-Disposition'] = "attachment" + 'output.pdf'
+#     return response
+    
+

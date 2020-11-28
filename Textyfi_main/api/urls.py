@@ -7,4 +7,5 @@ urlpatterns = [
    path('ratereview/<str:review>',views.ratereview,name='ratereview'),
    path('wordcounter/<str:sentence>',views.wordcounter,name='wordcounter'),
    path('wordcounterapi/',views.wordcounterView,name='wordcounterapi'),
+   path('texthandapi/',views.texthandview,name='texthandapi'),
 ]

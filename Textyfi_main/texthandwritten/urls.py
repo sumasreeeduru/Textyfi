@@ -1,7 +1,8 @@
-# from django.contrib import admin
-# from django.urls import path , include
-# from .views import texthandwritten
+from django.contrib import admin
+from django.urls import path , include
+from .views import texthandwritten
+from api.views import texthandview
 
-# urlpatterns = [
-#    path('texthandwritten',texthandwritten,name='texthandwritten'),
-# ]
+urlpatterns = [
+   path('texthandapi/',texthandview,name='texthandapi'),
+]

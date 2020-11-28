@@ -55,12 +55,14 @@ def pdf_creation(PNG_FILE, flag=False):
         rgb.paste(rgba, mask=rgba.split()[3])  # paste using alpha channel as mask
         rgb.save('media/outputs/output.pdf',
                 append=flag)
+        # thand=texthand.objects.create(pdffile=open('media/outputs/output.pdf')).save()
 def textsen(request,sentence):
     sentence1=sentence
+    pdffile1=open('media/outputs/output.pdf') 
     thand=texthand.objects.create(sentence=sentence1).save()
     return HttpResponse(str(sentence))
 def texthandview(request):
-   
+    pdffile=None
     sentence=texthand.objects.all()
     if request.method == 'POST':
         global BG
@@ -70,7 +72,7 @@ def texthandview(request):
         data=res.text
         with open('media/outputs/output.pdf', 'w') as file:
             pass
-
+        pdffile=open('media/outputs/output.pdf','r') 
         l = len(data)
         nn = len(data) // 600
         chunks, chunk_size = len(data), len(data) // (nn + 1)
@@ -157,6 +159,9 @@ def texthandwritten(request):
     else:
         form=handwrittenForm()
     return render(request,'app/texthand.html',{'form':form})
+
+
+
 def download(request):
     path = expanduser('~/outputs/')
     wrapper = FileWrapper(open("media/outputs/output.pdf",'rb'))
