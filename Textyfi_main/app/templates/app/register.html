@@ -1,35 +1,3 @@
-{% load static %}
-<!DOCTYPE html>
-<!--www.codingflicks.com--> 
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title> Signup Form </title>
-	<link rel="stylesheet" type="text/css" href="{% static 'app/login.css' %}">
-	
-</head>
-<body>
-	{% if form.errors %}
-          <div class="alert alert-danger" style="margin-top: 155px;">{{form.errors}}</div>
-      {% endif %}
-	<div class="form-box">
-		<div class="header-text">
-			Signup Form
-		</div>
-		<form method="POST" action="{% url 'register_view' %}">
-			{% csrf_token %}
-			<input placeholder="Email" type="text" name="email">
-			<input placeholder="username" type="text" name="username"> 
-			<input placeholder="Password" type="password" name="password1">
-			<input placeholder="Confirm Password" type="password" name="password2">
-			<input id="terms" type="checkbox"> 
-			<label for="terms"></label>
-			<span>Agree with <a href="#">Terms & Conditions</a></span>
-			<a href=" {% url 'index_view' %}" >
-			<button>Signup</button></a>
-		</form>
-		 <a href="{% url 'login_view' %}">Go to Login</a>
-		  <a href="{% url 'index_view' %}" style="padding-left:10px;">Home</a>
-	</div>
-</body>
-</html>
+version https://git-lfs.github.com/spec/v1
+oid sha256:794a5457e426bfe1bb87d1da383b585e7d0fdc6d46ed6f3f799248b7fbc998c8
+size 1141
