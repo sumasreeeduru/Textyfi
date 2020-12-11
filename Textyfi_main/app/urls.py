@@ -8,6 +8,7 @@ urlpatterns = [
     path('register/', register_view, name="register_view"),
     path('ratereview/', ratereview, name="ratereview"),
     path('wordcounter/',wordcounter,name='wordcounter'),
+    path('grammar/',grammar,name='grammar'),
     path('wordcounterapi/',wordcounterView,name='wordcounterapi'),
     path('wordcounterimg/',wordcounterimg,name='wordcounterimg'),
     ]

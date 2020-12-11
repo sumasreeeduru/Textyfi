@@ -1,7 +1,1 @@
-pip install djongo
-pip install dnspython
-pip install -U textblob
-python -m textblob.download_corpora
-pip install vaderSentiment
-pip install djangorestframework
-pip install djangorestframework-simplejwt
+[1020/224939.625:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

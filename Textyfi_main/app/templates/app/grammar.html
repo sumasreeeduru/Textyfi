@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="{% static 'app/wordcounter.css' %}">
+    <script src="sticky.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body style="background-color: #e2e0e1;">
+  <header class="header-area header-sticky">
+  <div class="container">
+    
+      <div class="row">
+          <div class="col-12">
+              <nav class="main-nav" style="background-color: #8261ee;">
+                <a href="{% url 'index_view' %}" class="logo" style="color:black; font-size:25px;">
+                  TextYfi!
+               
+           </a>
+               <!-- ***** Logo End ***** -->
+               <!-- ***** Menu Start ***** -->
+               <ul class="nav" >
+                   <li><a href="{% url 'index_view' %}" class="active" style="font-size: 20px;">Home</a></li>
+                   <li><a href="#features" style="font-size: 20px;">About</a></li>
+                   <li><a href="#work-process" style="font-size: 20px;">Contact</a></li>
+                   {% if request.user.is_authenticated %}
+                   <li><a href="#" style="font-size: 20px;">Profile</a></li>
+                   <li><a href="{% url 'logout_view' %}" style="font-size: 20px;">Logout</a></li>
+                   {% else %}
+                     <li><a href="{% url 'login_view' %}" style="font-size: 20px;">LOGIN</a></li>
+                     
+                     <li><a href="{% url 'register_view' %}" style="font-size: 20px;">SIGN UP</a></li>
+                     {% endif %}
+               </ul>
+               <a class='menu-trigger'>
+                   <span>Menu</span>
+               </a>
+                  
+                  <!-- ***** Menu End ***** -->
+              </nav>
+          </div>
+      
+    </div>
+  </div>
+</header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="row" >
+  <div class="col-lg-8">
+    
+    <div class="form-group" style="padding-left: 50px;">
+        <h3><label for="comment">Enter your text here</label></h3>
+        <form action="{% url 'grammar' %}" method="POST" enctype='multipart/form-data'>
+          
+          {% csrf_token %}
+          {% if text %}
+          <textarea name="text" class="form-control" rows="10" id="txtName" type="submit">{{ text }}</textarea>
+          {% else %}
+          <textarea name="text" class="form-control" rows="10" id="txtName" type="submit"></textarea>
+          {% endif %}
+          <button type="submit" class="btn btn-info" >Get corrected grammar</button>
+        </form>
+       
+      
+      </div>
+    <br> 
+    <div class="input-group mb-3" style="padding-left: 50px;">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1" >Correct grammar is</span>
+      </div>
+      {% if grammar %}
+      <textarea>{{ grammar }}</textarea>
+      {% else %}
+      <textarea>{{ None }}</textarea>
+      {% endif %}
+      <!-- <input type="text" class="form-control"  aria-describedby="basic-addon1"> -->
+    </div>
+    
+    <div class="input-group mb-3" style="padding-left: 50px;">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile02">
+        <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+      </div>
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-info">Upload</button> 
+      </div>
+    </div>
+       
+      
+</div>
+  <div class="col-lg-4" id="tabs" style="padding-top: 40px;">
+    <ul>
+      <li><a href="{% url 'wordcounter' %}" style="background-color: rgb(161, 161, 161);">Word Counter</a></li>
+   
+      <li><a href='#tabs-2' style="background-color: rgb(161, 161, 161);">Word Retrieval</a></a></li>
+      <li><a href="{% url 'ratereview' %}" style="background-color: rgb(161, 161, 161);">Review rating</a></a></li>
+      <li><a href="{% url 'grammar' %}" >GrammarBot</a></a></li>
+      <li><a href="{% url 'texthandwritten' %}" style="background-color: rgb(161, 161, 161);">Text to Handwritten</a></a></li>
+    </ul>
+  </div>
+  </div>
+   
+
+
+
+<br>
+
+    <div class="container2" style="background-color: black;">
+<footer class="page-footer font-small blue pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 style="color:white" class="text-uppercase" >TextYfi!</h5>
+        
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        
+
+        <ul style="font-size:20px" class="list-unstyled">
+          <li>
+            <a href="#!">About</a>
+          </li>
+          <li>
+            <a href="#!">Terms of Use</a>
+          </li>
+          <li>
+            <a href="#!">Privacy policy</a>
+          </li>
+          <li>
+            <a href="#!">Contact Us</a>
+          </li>
+          
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-3 mb-md-0 mb-3">
+
+        <!-- Links -->
+        
+
+        <ul style="font-size:20px" class="list-unstyled">
+          <li>
+            <a href="#!">Careers</a>
+          </li>
+          <li>
+            <a href="#!">Blogs</a>
+          </li>
+          <li>
+            <a href="#!">Refund policy</a>
+          </li>
+          <li>
+            <a href="#!">User Guidelines</a>
+          </li>
+          
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div style="color:white;font-size: 10px" class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/"> Textyfiteam.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+</div>
+
+
+</body>
+</html>

@@ -9,10 +9,11 @@ from .models import user_model,inpimg
 from .utils import Util
 from django.contrib.sites.shortcuts import get_current_site
 from django.urls import reverse
-from api.models import wordcounterModel,ratereviewModel
+from api.models import wordcounterModel,ratereviewModel,grammarModel
 from api.views import wordcounterView
 
 import re
+from django.http import JsonResponse,HttpResponse
 import os,io
 import pandas as pd
 from google.cloud import vision as v
@@ -99,8 +100,20 @@ def wordcounter(request):
         temp={'sentence':"Enter text", 'count':0}
     return render(request,'app/wordcounter.html',temp)
 
+def grammar(request):
+    # grammar="hi"
+    text=grammarModel.objects.all()
+    if request.method=='POST':
+        res=request.POST
+        text=res['text']
+        res=requests.get('http://localhost:8000/api/grammar/'+ text)
 
-
+        grammar=res.text
+        temp={'text':text,'grammar':grammar}
+    else:
+        temp={'text':"enter text",'grammar':None}
+    return render(request,'app/grammar.html',temp)
+    # return HttpResponse(temp)
 def wordcounterimg(request):
     if request.method=='POST':
         name1=inpimg(inp_img=request.POST)
@@ -116,7 +129,6 @@ def wordcounterimg(request):
             image=v.Image(content=content)
             response=client.text_detection(image=image)
             texts=response.text_annotations
-            # df=pd.DataFrame(columns=['description'])
             df=[]
             for text in texts:
                 df.append(text.description

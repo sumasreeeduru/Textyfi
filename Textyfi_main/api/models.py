@@ -8,5 +8,10 @@ class wordcounterModel(models.Model):
 class ratereviewModel(models.Model):
     review=models.TextField()
     rating=models.FloatField()
+class grammarModel(models.Model):
+    text=models.TextField()
+    grammar=models.TextField()
+
+    
 
     
